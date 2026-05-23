@@ -1,0 +1,24 @@
+# Java / Spring Boot
+springboot/target/
+springboot/*.jar
+springboot/*.class
+springboot/*.db
+*.class
+
+# Node / Vue
+vue-project/node_modules/
+vue-project/dist/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# WorkBuddy
+.workbuddy/
+.codebuddy/
+package-lock.json

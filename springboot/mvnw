@@ -1,0 +1,31 @@
+#!/bin/sh
+# Maven Wrapper script for Windows (Git Bash)
+# Adapted from https://github.com/apache/maven-wrapper
+
+set -e
+
+# Resolve project directory
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+WRAPPER_JAR="$PROJECT_DIR/.mvn/wrapper/maven-wrapper.jar"
+WRAPPER_PROPERTIES="$PROJECT_DIR/.mvn/wrapper/maven-wrapper.properties"
+
+# Read distribution URL from properties
+if [ -f "$WRAPPER_PROPERTIES" ]; then
+    DISTRIBUTION_URL=$(grep 'distributionUrl' "$WRAPPER_PROPERTIES" | cut -d'=' -f2-)
+else
+    DISTRIBUTION_URL="https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.9/apache-maven-3.9.9-bin.zip"
+fi
+
+# Maven home directory
+MAVEN_HOME="$HOME/.m2/wrapper/dists/apache-maven-3.9.9"
+
+if [ ! -f "$MAVEN_HOME/bin/mvn" ]; then
+    echo "Downloading Maven..."
+    mkdir -p "$MAVEN_HOME"
+    TMPFILE="$PROJECT_DIR/.mvn/wrapper/maven.zip"
+    curl -sL "$DISTRIBUTION_URL" -o "$TMPFILE"
+    unzip -q -o "$TMPFILE" -d "$HOME/.m2/wrapper/dists/"
+    rm "$TMPFILE"
+fi
+
+exec "$MAVEN_HOME/bin/mvn" "$@"
