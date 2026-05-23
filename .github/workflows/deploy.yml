@@ -30,12 +30,18 @@ jobs:
       - name: Build frontend
         run: cd vue-project && npm run build
 
-      - name: Copy to docs
-        run: cd vue-project && cp -r dist docs
+      - name: Build frontend
+        run: cd vue-project && npm run build
+
+      - name: Prepare docs
+        run: |
+          rm -rf docs
+          cp -r vue-project/dist docs
+          touch docs/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: vue-project/docs
+          path: docs
 
   deploy:
     needs: build
